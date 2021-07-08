@@ -19,5 +19,9 @@ router.get('/', (req,res)=>{
 	res.render('index', {blog: blog})
 })
 
+router.get('/new', (req,res)=>{
+	res.render('new')
+})
+
 
 module.exports = router
