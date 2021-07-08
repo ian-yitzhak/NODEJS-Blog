@@ -2,6 +2,8 @@ const express = require('express')
 const router = express.Router()
 const Blog = require('../models/blog')
 
+const{  ensureAuthenticated } = require('./auth');
+
 router.get('/new' , (req,res)=>{
 	res.render('new', {blog : new Blog()})
 })
@@ -20,7 +22,7 @@ router.get('/:slug', async (req,res)=>{
 	res.render('show', {blog : blog})
 })
 
-router.post('/', async (req,res)=>{
+router.post('/', ensureAuthenticated , async (req,res)=>{
 
 	const blog = new Blog({
 		title: req.body.title,
@@ -51,7 +53,7 @@ router.get('/', async  (req,res)=>{
 	}
 })
 
-router.put('/:id',async (req,res)=>{
+router.put('/:id', ensureAuthenticated ,async (req,res)=>{
 
   req.blog = await Blog.findById(req.params.id);
   let blog = req.blog;
@@ -69,7 +71,7 @@ router.put('/:id',async (req,res)=>{
 })
 
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id',ensureAuthenticated ,  async (req, res) => {
   await Blog.findByIdAndDelete(req.params.id)
   res.redirect('/blog')
 })
