@@ -50,7 +50,7 @@ router.get('/', async  (req,res)=>{
 		res.render('index' , {blog: blog})
 	}catch(e){
 		console.log(e)
-	}
+}
 })
 
 router.put('/:id', ensureAuthenticated ,async (req,res)=>{

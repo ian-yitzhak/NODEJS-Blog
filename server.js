@@ -26,7 +26,7 @@ app.use(express.urlencoded({extended: false}));
 app.use(methodOverride('_method'))
 
 
-router.get('/', async  (req,res)=>{
+app.get('/', async  (req,res)=>{
 
 	try{
 		const blog = await Blog.find({}).sort({
