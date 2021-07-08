@@ -46,9 +46,10 @@ router.get('/', async  (req,res)=>{
 	}
 })
 
-router.delete('/:id', async (req,res)=>{
-	await Blog.findByIdAndDelete(req.params.id)
-	res.redirect('/')
+
+router.delete('/:id', async (req, res) => {
+  await Blog.findByIdAndDelete(req.params.id)
+  res.redirect('/blog')
 })
 
 

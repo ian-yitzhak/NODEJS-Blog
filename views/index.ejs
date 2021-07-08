@@ -27,7 +27,12 @@
         <div class="card-butitle text-muted mb-2"> <%= blog.date.toLocaleDateString() %></div>
         <div class="card-text mb-2"><%= blog.description %></div>
 
-       <a href="/blog/<%= blog.slug %>" class="btn btn-danger">read more</a>
+       <a href="/blog/<%= blog.slug %>" class="btn btn-primary">read more</a>
+
+       <form action="/blog/<%= blog.id %>?_method=DELETE" method="POST" class="d-inline">
+        <button type="submit" class="btn btn-danger">delete</button>
+         
+       </form>
 
       </div>
       
