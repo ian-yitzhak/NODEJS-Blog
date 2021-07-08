@@ -14,27 +14,29 @@
     
 
   <div class="container">
-    <h1 class="mb-4">Blog Articles</h1>
-    <a href="/blog/new" class="btn btn-success">NEW</a>
-    <% blog.forEach(blog => { %>
+    <a href="/blog" class="btn btn-secondary mt-5">ALL BLOGS</a>
+   
 
-    <div class="mt-4">
+     <div class="mt-4">
 
 
       <div class="card-body">
         <h5 class="card-text">
           <%= blog.title %></h5>
         <div class="card-butitle text-muted mb-2"> <%= blog.date.toLocaleDateString() %></div>
+        <div class="card-text mb-2"><%= blog.markdown %></div>
         <div class="card-text mb-2"><%= blog.description %></div>
-
-       <a href="/blog/<%= blog.id %>" class="btn btn-danger">read more</a>
+        <a href="/blog/edit/<%= blog.id %>" class="btn btn-primary">Edit</a>
 
       </div>
       
     </div>
 
-      <% }) %>
+  
 
+    
+  </div>
+    
     
   </div>
 
