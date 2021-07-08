@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const blogRoute = require('./routes/blog')
 const authRoute = require('./routes/login')
+const Blog = require('./models/blog')
 
 const methodOverride = require('method-override')
 
@@ -25,8 +26,17 @@ app.use(express.urlencoded({extended: false}));
 app.use(methodOverride('_method'))
 
 
-app.get('/', (req,res)=>{
-	res.send('hello')
+router.get('/', async  (req,res)=>{
+
+	try{
+		const blog = await Blog.find({}).sort({
+			date: 'desc'
+		})
+
+		res.render('index' , {blog: blog})
+	}catch(e){
+		console.log(e)
+}
 })
 
 
