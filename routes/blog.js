@@ -6,6 +6,11 @@ router.get('/new' , (req,res)=>{
 	res.render('new', {blog : new Blog()})
 })
 
+router.get('/edit/:id' , async (req,res)=>{
+	const blog = await Blog.findById(req.params.id)
+	res.render('edit', {blog : blog })
+})
+
 router.get('/:slug', async (req,res)=>{
 	const blog = await Blog.findOne({ slug: req.params.slug })
 	if(blog == null){
@@ -43,6 +48,23 @@ router.get('/', async  (req,res)=>{
 		res.render('index' , {blog: blog})
 	}catch(e){
 		console.log(e)
+	}
+})
+
+router.put('/:id',async (req,res)=>{
+
+  req.blog = await Blog.findById(req.params.id);
+  let blog = req.blog;
+  blog.title = req.body.title;
+  blog.markdown = req.body.markdown;
+  blog.description = req.body.description;
+
+	try{
+
+		blog = await blog.save()
+		res.redirect(`/blog/${blog.slug }`)
+	}catch(err){
+		res.status(422).send(err)
 	}
 })
 
