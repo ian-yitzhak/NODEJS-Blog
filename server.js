@@ -4,8 +4,8 @@ const blogRoute = require('./routes/blog')
 
 require('./db/db')
 app.use(express.json());
-app.set('views engine' , 'ejs')
-app.set('views', __dirname + 'views')
+app.set('view engine' , 'ejs')
+app.set('views', __dirname + '/views')
 
 app.get('/', (req,res)=>{
 	res.send('hello')
