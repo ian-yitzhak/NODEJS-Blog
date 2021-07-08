@@ -26,7 +26,7 @@ router.post('/', ensureAuthenticated , async (req,res)=>{
 
 	const blog = new Blog({
 		title: req.body.title,
-		description: req.body.description,
+		description: req.body.description, 
 		markdown: req.body.markdown
 	})
 	try{
@@ -59,7 +59,7 @@ router.put('/:id', ensureAuthenticated ,async (req,res)=>{
   let blog = req.blog;
   blog.title = req.body.title;
   blog.markdown = req.body.markdown;
-  blog.description = req.body.description;
+  blog.description= req.body.description
 
 	try{
 

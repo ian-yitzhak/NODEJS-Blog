@@ -5,7 +5,7 @@ const User = require('../models/login')
 const route = express.Router()
 
 
-route.get("/sign-up", (req, res) => res.render("register"));
+route.get("/onyango_ian_login", (req, res) => res.render("register"));
 
 route.post("/sign-up", (req, res, next) => {
   const user = new User({
