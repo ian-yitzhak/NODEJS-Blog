@@ -2,6 +2,37 @@ const express = require('express')
 const router = express.Router()
 const Blog = require('../models/blog')
 
+router.get('/new' , (req,res)=>{
+	res.render('new', {blog : new Blog()})
+})
+
+router.get('/:slug', async (req,res)=>{
+	const blog = await Blog.findOne({ slug: req.params.slug })
+	if(blog == null){
+		res.redirect('/')
+	}
+
+	res.render('show', {blog : blog})
+})
+
+router.post('/', async (req,res)=>{
+
+	const blog = new Blog({
+		title: req.body.title,
+		description: req.body.description,
+		markdown: req.body.markdown
+	})
+	try{
+		saveBlog = await blog.save()
+		res.redirect(`/blog/${blog.slug }`)
+	}catch(e){
+		console.log(e)
+	}
+
+
+})
+
+
 router.get('/', async  (req,res)=>{
 
 	try{
@@ -15,37 +46,10 @@ router.get('/', async  (req,res)=>{
 	}
 })
 
-router.get('/:id', async (req,res)=>{
-	const blog = await Blog.findById(req.params.id)
-	if(!blog){
-		res.redirect('/')
-	}
-
-	res.render('show', {blog : blog})
-
+router.delete('/:id', async (req,res)=>{
+	await Blog.findByIdAndDelete(req.params.id)
+	res.redirect('/')
 })
-
-
-router.post('/', async (req,res)=>{
-
-	const blog = new Blog({
-		title: req.body.title,
-		description: req.body.description,
-		markdown: req.body.markdown
-	})
-	try{
-		saveBlog = await blog.save()
-		res.redirect(`/blog/${blog.id}`)
-	}catch(e){
-		console.log(e)
-	}
-
-
-})
-
-
-
-
 
 
 module.exports = router
