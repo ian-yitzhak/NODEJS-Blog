@@ -34,7 +34,7 @@ route.post(
   "/log-in",
   passport.authenticate("local", {
     successRedirect: "/blog",
-    failureRedirect: "/admin/login"
+    failureRedirect: "/admin/log-in"
   })
 );
 
